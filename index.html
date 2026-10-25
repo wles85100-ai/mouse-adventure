@@ -101,11 +101,11 @@ function mole(m){
  const idx=m.stage==='hit'?2: m.stage==='stay'? (Math.sin(elapsed*3+m.seed)>0.3?1:0):0;
  const img=imgs[idx]&&imgs[idx].complete&&imgs[idx].naturalWidth?imgs[idx]:imgs[0];
  if(!img||!img.complete||!img.naturalWidth)return;
- const isBoss=m.type==='boss',scale=isBoss?2.5:2.55;
+ const isBoss=m.type==='boss',scale=isBoss?1.8:1.9;
  const iw=img.naturalWidth*scale, ih=img.naturalHeight*scale;
  const kick=m.stage==='hit'?Math.sin(Math.min(1,m.age/.3)*Math.PI)*.22:0;
  ctx.save();ctx.beginPath();ctx.rect(p.x-102,p.y-190,204,215);ctx.clip();
- ctx.translate(p.x,p.y+95-out*65+kick*27);
+ ctx.translate(p.x,p.y+65-out*75+kick*27);
  ctx.rotate(m.stage==='hit'?Math.sin(m.age*24)*.12:Math.sin(elapsed*2.2+m.seed)*.017);
  ctx.scale(1+kick*.09,1-kick*.18);
  ctx.drawImage(img,-iw/2,-ih+18,iw,ih);
