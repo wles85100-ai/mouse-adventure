@@ -19,7 +19,7 @@
 <section class="overlay" id="levels"><div class="panel"><h2>🗺️ 關卡選擇</h2><p class="sub" id="worldLabel">每5關進入新的世界！</p><div class="difficulty" id="diffBtns"><button data-diff="easy" class="selected">🌼 簡單</button><button data-diff="normal">⚡ 普通</button><button data-diff="hard">🔥 困難</button></div><div class="map" id="levelMap"></div><p class="note">完成關卡可解鎖下一關。進度保存在此瀏覽器。</p><div class="buttons"><button class="btn secondary" data-back>↩ 回首頁</button></div></div></section>
 <section class="overlay" id="result"><div class="panel"><h2 id="resultTitle">挑戰結果</h2><div class="stars" id="resultStars">⭐⭐⭐</div><p class="statline" id="resultStats"></p><p id="resultDetail"></p><div class="buttons"><button class="btn green" id="nextLevel">下一關 ➜</button><button class="btn" id="retry">🔄 再玩一次</button><button class="btn secondary" id="resultLevels">🗺️ 關卡選擇</button></div></div></section>
 <section class="overlay" id="paused"><div class="panel"><h2>⏸ 遊戲暫停</h2><p>魔法星星槌準備好了嗎？</p><div class="buttons"><button class="btn green" id="resume">▶ 繼續遊戲</button><button class="btn secondary" id="quit">🏠 返回首頁</button></div></div></section>
-</main><div class="footer">鼠除大作戰 · V3.3 普通地鼠定位修正版 · 普通地鼠逐格動畫與特效 · 可直接部署 GitHub Pages</div>
+</main><div class="footer">鼠除大作戰 · V3.4 普通地鼠定位修正版 · 普通地鼠逐格動畫與特效 · 可直接部署 GitHub Pages</div>
 <script>
 'use strict';
 const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
@@ -141,7 +141,7 @@ if(m.stage==='hit'){line(-31,-23,-14,-11,'#54352d',5);line(-31,-11,-14,-23,'#543
 ellipse(0,-11,11,8,'#ee9c94');ellipse(0,4,21,14,'#6f3c32');ellipse(0,7,13,7,'#e98d8b');rounded(-9,-1,8,12,3,'#fff6e4');rounded(1,-1,8,12,3,'#fff6e4');
 if(type==='fast'){rounded(-63,-79,126,16,4,'#e84d4c');rounded(33,-84,35,13,5,'#f0be55')}if(type==='heart'){star(45,-90,15,'#f9b6ca');ellipse(38,-100,18,16,'#ec78a4');ellipse(53,-101,18,16,'#f699bd');star(-54,-90,9,'#ffe3ea')}if(type==='gold'||type==='boss'){ctx.fillStyle='#ffc637';ctx.beginPath();ctx.moveTo(-39,-98);ctx.lineTo(-43,-128);ctx.lineTo(-18,-112);ctx.lineTo(0,-136);ctx.lineTo(18,-112);ctx.lineTo(43,-128);ctx.lineTo(39,-98);ctx.closePath();ctx.fill();rounded(-42,-100,84,14,5,'#f3aa25','#fff0a4',3);star(0,-110,9,'#fff4c6')}if(type==='boss'){rounded(-79,-23,25,67,10,'#c64e5a');rounded(55,-23,25,67,10,'#c64e5a')}if(type==='bomb'){ellipse(0,-112,6,17,'#8c604e');ellipse(2,-131,11,11,'#ff9d33');star(2,-136,12,'#fff2a1')}
 ctx.restore()}
-// V3.3: tune the NORMAL mole against the painted holes. Other mole art is unchanged.
+// V3.4: tune the NORMAL mole against the painted holes. Other mole art is unchanged.
 // Tuning these values does not require re-uploading any PNG files.
 const NORMAL_TUNE={
   offsetX:6,          // visual horizontal center relative to the fixed hole
@@ -176,7 +176,10 @@ function mole(m){
   if(!usable(img)){vectorMole(m);return;}
   const b=NORMAL_BOUNDS[index]||[40,65,218,226];
   const scale=NORMAL_TUNE.widthScale;
-  const cx=p.x+NORMAL_TUNE.offsetX;
+  // Only bottom-left and bottom-right normal moles need horizontal calibration.
+  // Hole indices: bottom-left=6, bottom-right=8. Keep all other holes unchanged.
+  const bottomShift=m.i===6?-22:m.i===8?22:0;
+  const cx=p.x+NORMAL_TUNE.offsetX+bottomShift;
   const imageBottom=p.y+NORMAL_TUNE.bottomOffset+(1-smooth)*NORMAL_TUNE.riseDistance;
   // We anchor each frame by its *visible* bottom edge, not its canvas border.
   // Keep the background's original painted hole exactly where it is.
@@ -184,7 +187,7 @@ function mole(m){
   const imageY=imageBottom-b[3]*scale;
   ctx.save();
   ctx.beginPath();
-  ctx.rect(p.x-NORMAL_TUNE.clipHalfWidth,p.y-215,
+  ctx.rect(p.x+bottomShift-NORMAL_TUNE.clipHalfWidth,p.y-215,
     NORMAL_TUNE.clipHalfWidth*2,225+NORMAL_TUNE.clipBottomOffset);
   ctx.clip();
   ctx.drawImage(img,imageX,imageY,256*scale,256*scale);
