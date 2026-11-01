@@ -19,7 +19,7 @@
 <section class="overlay" id="levels"><div class="panel"><h2>🗺️ 關卡選擇</h2><p class="sub" id="worldLabel">每5關進入新的世界！</p><div class="difficulty" id="diffBtns"><button data-diff="easy" class="selected">🌼 簡單</button><button data-diff="normal">⚡ 普通</button><button data-diff="hard">🔥 困難</button></div><div class="map" id="levelMap"></div><p class="note">完成關卡可解鎖下一關。進度保存在此瀏覽器。</p><div class="buttons"><button class="btn secondary" data-back>↩ 回首頁</button></div></div></section>
 <section class="overlay" id="result"><div class="panel"><h2 id="resultTitle">挑戰結果</h2><div class="stars" id="resultStars">⭐⭐⭐</div><p class="statline" id="resultStats"></p><p id="resultDetail"></p><div class="buttons"><button class="btn green" id="nextLevel">下一關 ➜</button><button class="btn" id="retry">🔄 再玩一次</button><button class="btn secondary" id="resultLevels">🗺️ 關卡選擇</button></div></div></section>
 <section class="overlay" id="paused"><div class="panel"><h2>⏸ 遊戲暫停</h2><p>魔法星星槌準備好了嗎？</p><div class="buttons"><button class="btn green" id="resume">▶ 繼續遊戲</button><button class="btn secondary" id="quit">🏠 返回首頁</button></div></div></section>
-</main><div class="footer">鼠除大作戰 · V3.2 出洞動畫修正版 · 普通地鼠逐格動畫與特效 · 可直接部署 GitHub Pages</div>
+</main><div class="footer">鼠除大作戰 · V3.3 普通地鼠定位修正版 · 普通地鼠逐格動畫與特效 · 可直接部署 GitHub Pages</div>
 <script>
 'use strict';
 const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
@@ -141,39 +141,65 @@ if(m.stage==='hit'){line(-31,-23,-14,-11,'#54352d',5);line(-31,-11,-14,-23,'#543
 ellipse(0,-11,11,8,'#ee9c94');ellipse(0,4,21,14,'#6f3c32');ellipse(0,7,13,7,'#e98d8b');rounded(-9,-1,8,12,3,'#fff6e4');rounded(1,-1,8,12,3,'#fff6e4');
 if(type==='fast'){rounded(-63,-79,126,16,4,'#e84d4c');rounded(33,-84,35,13,5,'#f0be55')}if(type==='heart'){star(45,-90,15,'#f9b6ca');ellipse(38,-100,18,16,'#ec78a4');ellipse(53,-101,18,16,'#f699bd');star(-54,-90,9,'#ffe3ea')}if(type==='gold'||type==='boss'){ctx.fillStyle='#ffc637';ctx.beginPath();ctx.moveTo(-39,-98);ctx.lineTo(-43,-128);ctx.lineTo(-18,-112);ctx.lineTo(0,-136);ctx.lineTo(18,-112);ctx.lineTo(43,-128);ctx.lineTo(39,-98);ctx.closePath();ctx.fill();rounded(-42,-100,84,14,5,'#f3aa25','#fff0a4',3);star(0,-110,9,'#fff4c6')}if(type==='boss'){rounded(-79,-23,25,67,10,'#c64e5a');rounded(55,-23,25,67,10,'#c64e5a')}if(type==='bomb'){ellipse(0,-112,6,17,'#8c604e');ellipse(2,-131,11,11,'#ff9d33');star(2,-136,12,'#fff2a1')}
 ctx.restore()}
+// V3.3: tune the NORMAL mole against the painted holes. Other mole art is unchanged.
+// Tuning these values does not require re-uploading any PNG files.
+const NORMAL_TUNE={
+  offsetX:6,          // visual horizontal center relative to the fixed hole
+  widthScale:.85,     // original mole body is 175-190 source pixels wide
+  bottomOffset:21,    // character feet end slightly behind the front hole lip
+  riseDistance:130,   // entire sprite starts hidden beneath the hole
+  clipHalfWidth:94,   // confines art to one hole; prevents neighboring overlap
+  clipBottomOffset:10 // hide everything below the dark opening
+};
+// Bounding boxes measured from our 256x256 transparent normal PNGs; no dirt/hole images.
+const NORMAL_BOUNDS=[
+ [54,167,208,235],[42,126,218,236],[43,96,218,237],[43,74,217,236],
+ [42,55,217,224],[43,57,217,226],[42,64,218,225],[32,70,221,230],
+ [42,42,227,222],[43,68,217,222],[35,94,216,224],[41,113,215,224],
+ [47,119,213,219],[50,135,207,217],[46,153,211,213],null
+];
 function mole(m){
- const p=holes[m.i],out=m.out;if(out<=0)return;
- // Each mole moves vertically, and is masked at the edge of the hole.
- // Smoothstep eliminates the sudden popping / abrupt stops of the previous version.
+ const p=holes[m.i],out=m.out;
+ if(out<=0)return;
  const smooth=out*out*(3-2*out);
- const ground=p.y+18;
  if(m.type==='normal' && ART.normalFrames.some(usable)){
+  // The original sheet contains poses of different sizes; hold the fully visible
+  // poses steady during rise/hide instead of stretching the head-sized frames.
   let index=7;
-  if(m.stage==='stay')index=5+(Math.floor(elapsed*4+m.seed)%5);
+  if(m.stage==='stay')index=4+(Math.floor(elapsed*3+m.seed)%6);
   else if(m.stage==='hit')index=10;
-  const img=usable(ART.normalFrames[index])?ART.normalFrames[index]:ART.normalFrames.find(usable);
+  let img=ART.normalFrames[index];
+  if(!usable(img)){
+   index=ART.normalFrames.findIndex(usable);
+   img=ART.normalFrames[index];
+  }
+  if(!usable(img)){vectorMole(m);return;}
+  const b=NORMAL_BOUNDS[index]||[40,65,218,226];
+  const scale=NORMAL_TUNE.widthScale;
+  const cx=p.x+NORMAL_TUNE.offsetX;
+  const imageBottom=p.y+NORMAL_TUNE.bottomOffset+(1-smooth)*NORMAL_TUNE.riseDistance;
+  // We anchor each frame by its *visible* bottom edge, not its canvas border.
+  // Keep the background's original painted hole exactly where it is.
+  const imageX=cx-((b[0]+b[2])/2)*scale;
+  const imageY=imageBottom-b[3]*scale;
   ctx.save();
-  // Clip sprites to the opening; the bottom should never protrude below the ground.
-  ctx.beginPath();ctx.rect(p.x-101,p.y-204,202,ground-(p.y-204));ctx.clip();
-  const y=p.y+30+(1-smooth)*112;
-  const bob=m.stage==='stay'?Math.sin(elapsed*5+m.seed)*2:0;
-  const squash=m.stage==='hit'?1-.13*Math.sin(Math.min(1,m.age/.45)*Math.PI):1;
-  ctx.translate(p.x,y+bob);ctx.scale(1,squash);
-  // Transparent PNG 256x256 with aligned bottom margin.
-  ctx.drawImage(img,-128,-248,256,256);
+  ctx.beginPath();
+  ctx.rect(p.x-NORMAL_TUNE.clipHalfWidth,p.y-215,
+    NORMAL_TUNE.clipHalfWidth*2,225+NORMAL_TUNE.clipBottomOffset);
+  ctx.clip();
+  ctx.drawImage(img,imageX,imageY,256*scale,256*scale);
   ctx.restore();
-  // Restrict additional visual effects to the hit phase. The source appear/disappear
-  // graphics contain neighboring fragments and otherwise look like flying dirt.
   if(m.stage==='hit')drawV3Effect('hit',p,m.age,.45);
   return;
  }
+ // Unchanged: fast, gold, heart, bomb and boss use their original art.
+ const ground=p.y+18;
  const imgs=ART.moles[m.type]||ART.moles.normal;
  const idx=m.stage==='hit'?2:m.stage==='stay'?(Math.sin(elapsed*3+m.seed)>0.3?1:0):0;
  let img=usable(imgs[idx])?imgs[idx]:imgs.find(usable);
  if(!usable(img)){vectorMole(m);return;}
  const isBoss=m.type==='boss';
  const iw=img.naturalWidth,ih=img.naturalHeight;
- // Keep different source sprites at a consistent on-screen height.
  const displayH=isBoss?169:152,displayW=displayH*iw/ih;
  const kick=m.stage==='hit'?Math.sin(Math.min(1,m.age/.32)*Math.PI):0;
  ctx.save();ctx.beginPath();ctx.rect(p.x-99,p.y-198,198,ground-(p.y-198));ctx.clip();
