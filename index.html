@@ -178,7 +178,7 @@ function mole(m){
   const scale=NORMAL_TUNE.widthScale;
   // Only bottom-left and bottom-right normal moles need horizontal calibration.
   // Hole indices: bottom-left=6, bottom-right=8. Keep all other holes unchanged.
-  const bottomShift=m.i===6?-22:m.i===8?22:0;
+  const bottomShift=m.i===6?-42:m.i===8?48:0;
   const cx=p.x+NORMAL_TUNE.offsetX+bottomShift;
   const imageBottom=p.y+NORMAL_TUNE.bottomOffset+(1-smooth)*NORMAL_TUNE.riseDistance;
   // We anchor each frame by its *visible* bottom edge, not its canvas border.
