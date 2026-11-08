@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f7bc74"><title>鼠除大作戰 V3.6｜特殊地鼠定位修正版</title>
+<meta name="theme-color" content="#f7bc74"><meta name="game-build" content="V3.7-position-only-20261108"><title>鼠除大作戰 V3.7｜地鼠座標微調版</title>
 <style>
 :root{font-family:'Trebuchet MS','Noto Sans TC','Microsoft JhengHei',sans-serif;color:#56321f;background:#fce5c6}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 20% 10%,#fff7d1,#f5c5a0 65%,#ddaa82);display:flex;justify-content:center;align-items:center;padding:12px}button{font:inherit;cursor:pointer;border:0;touch-action:manipulation}button:focus-visible{outline:3px solid white;outline-offset:3px}.shell{position:relative;width:min(100%,1000px);aspect-ratio:960/660;min-height:400px;max-height:calc(100dvh - 24px);overflow:hidden;border-radius:25px;border:6px solid #fff4cc;box-shadow:0 20px 65px #84512b66, inset 0 0 0 3px #c9804b;background:#83ce96;isolation:isolate}canvas{display:block;width:100%;height:100%;touch-action:none}.hud{position:absolute;top:13px;left:16px;right:16px;display:none;align-items:center;justify-content:space-between;gap:7px;pointer-events:none}.hud.show{display:flex}.pill{background:linear-gradient(#85502d,#58351f);border:3px solid #ffc96c;box-shadow:0 4px 0 #543216,0 6px 11px #4327125e;border-radius:16px;color:#fff5ce;padding:5px 13px;text-align:center;font-size:clamp(11px,1.65vw,17px);font-weight:900;white-space:nowrap;text-shadow:1px 2px 1px #362011}.pill strong{font-size:1.24em;color:#ffe561}.hud button{pointer-events:auto;min-width:49px}.overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:17px;background:linear-gradient(#fff0cf44,#4c2c3366);overflow-y:auto}.overlay.show{display:flex}.panel{width:min(670px,98%);max-height:100%;overflow-y:auto;text-align:center;background:linear-gradient(150deg,#fff9df,#ffe1ad);border:5px solid #fff9d5;border-radius:28px;box-shadow:0 12px 0 #b57347,0 19px 36px #502d2380;padding:clamp(13px,2.5vw,25px)}h1{margin:0;font-size:clamp(30px,6vw,58px);color:#ef703e;-webkit-text-stroke:1.5px #923f2b;text-shadow:2px 4px #ffe87d,4px 6px #b35032;line-height:1.2}h2{font-size:clamp(22px,3.6vw,35px);margin:0 0 8px;color:#984c2e}p{margin:8px 0 15px;line-height:1.5}.sub{font-weight:800;color:#a66d46}.buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:11px;margin:15px 0}.btn{color:white;font-weight:900;font-size:clamp(15px,2vw,20px);padding:12px 21px;border-radius:17px;background:linear-gradient(#ffb23f,#f07631);border:3px solid #fff2c2;box-shadow:0 5px 0 #b85e34,0 7px 9px #6b422b55;text-shadow:1px 2px #a04f2c}.btn.secondary{background:linear-gradient(#94d5ec,#358bbf);box-shadow:0 5px 0 #33728c}.btn.green{background:linear-gradient(#b1d875,#55a95d);box-shadow:0 5px 0 #467e43}.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #b85e34}.btn[disabled]{opacity:.5;filter:grayscale(.7);cursor:not-allowed}.difficulty{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}.difficulty button{background:#fff6de;border:2px solid #dab079;padding:9px 16px;border-radius:12px;color:#8c603d;font-weight:900}.difficulty button.selected{background:#f9a848;border-color:#ae5836;color:white}.map{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:520px;margin:12px auto}.map button{border:2px solid #f0c182;background:#fff8d8;border-radius:14px;padding:8px 2px;min-height:52px;font-weight:900;color:#93522d}.map button.current{background:#ffe18c;box-shadow:inset 0 0 0 2px #e69e3a}.map button.locked{filter:grayscale(.8);opacity:.45}.map small{display:block;font-size:10px}.note{font-size:13px;color:#9b714e}.statline{font-size:19px;font-weight:900;color:#8e502e;margin:12px 0}.stars{font-size:45px;color:#e7a82a;text-shadow:0 2px #ad6228}.toast{position:absolute;top:83px;left:50%;transform:translateX(-50%);background:#fff7dbee;border:3px solid #e9aa63;border-radius:14px;padding:7px 14px;color:#87472a;font-weight:900;text-align:center;display:none;pointer-events:none;z-index:3}.toast.show{display:block}.footer{position:fixed;bottom:0;color:#805537;font-size:11px;opacity:.75;pointer-events:none}@media(max-width:680px){body{padding:0;background:#eec49f}.shell{width:100vw;height:100dvh;max-height:none;min-height:0;border-width:0;border-radius:0;aspect-ratio:auto}.hud{left:5px;right:5px;top:7px;gap:3px}.pill{font-size:11px;padding:6px 5px;border-width:2px;border-radius:11px}.hud button{min-width:37px}.overlay{padding:7px}.panel{padding:14px 8px;border-radius:20px}.map{gap:4px}.map button{min-height:42px}.footer{display:none}}
 
@@ -15,11 +15,11 @@
 <main class="shell" id="shell" aria-label="鼠除大作戰遊戲"><canvas id="game" width="960" height="660" aria-label="打地鼠遊戲畫面"></canvas>
 <div class="hud" id="hud"><div class="pill">⭐ <span id="score">0</span></div><div class="pill">⏰ <span id="timer">60</span>s</div><div class="pill">🔥 <span id="combo">0</span> Combo</div><div class="pill">🎯 <span id="objective">0/0</span></div><button class="pill" id="pause" aria-label="暫停">Ⅱ</button></div>
 <div class="toast" id="toast"></div>
-<section class="overlay show" id="home"><div class="panel"><div style="font-size:48px">🌟🐹✨</div><h1>鼠除大作戰</h1><p class="sub">魔法星星槌 · 六大世界 · 30個關卡</p><p>敲地鼠拿分數！黃金地鼠 <b>+5</b>、炸彈地鼠 <b>-3</b>、愛心地鼠 <b>+3秒</b><br>連續敲中可獲得 Combo 加成，20 連擊進入 FEVER！</p><div class="buttons"><button class="btn" id="chooseLevel">🗺️ 選擇關卡</button><button class="btn secondary" id="endless">♾️ 無盡模式</button></div><p class="note">手機觸控與滑鼠都可以遊玩 · 敲擊有音效 · 支援裝置才會震動</p><div class="buttons"><button class="btn green" id="audioBtn">🔊 音效開啟</button></div></div></section>
+<section class="overlay show" id="home"><div class="panel"><div style="font-size:48px">🌟🐹✨</div><h1>鼠除大作戰</h1><p class="sub">魔法星星槌 · 六大世界 · 30個關卡</p><p class="note" style="margin:2px 0 5px;font-weight:900;color:#a04d2e">目前版本：V3.7｜地鼠座標修正版（2026-11-08）</p><p>敲地鼠拿分數！黃金地鼠 <b>+5</b>、炸彈地鼠 <b>-3</b>、愛心地鼠 <b>+3秒</b><br>連續敲中可獲得 Combo 加成，20 連擊進入 FEVER！</p><div class="buttons"><button class="btn" id="chooseLevel">🗺️ 選擇關卡</button><button class="btn secondary" id="endless">♾️ 無盡模式</button></div><p class="note">手機觸控與滑鼠都可以遊玩 · 敲擊有音效 · 支援裝置才會震動</p><div class="buttons"><button class="btn green" id="audioBtn">🔊 音效開啟</button></div></div></section>
 <section class="overlay" id="levels"><div class="panel"><h2>🗺️ 關卡選擇</h2><p class="sub" id="worldLabel">每5關進入新的世界！</p><div class="difficulty" id="diffBtns"><button data-diff="easy" class="selected">🌼 簡單</button><button data-diff="normal">⚡ 普通</button><button data-diff="hard">🔥 困難</button></div><div class="map" id="levelMap"></div><p class="note">完成關卡可解鎖下一關。進度保存在此瀏覽器。</p><div class="buttons"><button class="btn secondary" data-back>↩ 回首頁</button></div></div></section>
 <section class="overlay" id="result"><div class="panel"><h2 id="resultTitle">挑戰結果</h2><div class="stars" id="resultStars">⭐⭐⭐</div><p class="statline" id="resultStats"></p><p id="resultDetail"></p><div class="buttons"><button class="btn green" id="nextLevel">下一關 ➜</button><button class="btn" id="retry">🔄 再玩一次</button><button class="btn secondary" id="resultLevels">🗺️ 關卡選擇</button></div></div></section>
 <section class="overlay" id="paused"><div class="panel"><h2>⏸ 遊戲暫停</h2><p>魔法星星槌準備好了嗎？</p><div class="buttons"><button class="btn green" id="resume">▶ 繼續遊戲</button><button class="btn secondary" id="quit">🏠 返回首頁</button></div></div></section>
-</main><div class="footer">鼠除大作戰 · V3.6 特殊地鼠位置校正版 · 六種地鼠與30關 · GitHub Pages</div>
+</main><div class="footer">鼠除大作戰 · V3.7 地鼠座標微調版 · 六種地鼠與30關 · GitHub Pages</div>
 <script>
 'use strict';
 const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
@@ -30,7 +30,7 @@ for(const type of ['normal','fast','gold','heart','bomb','boss']){
  ART.moles[type]=[];for(let f=0;f<3;f++){const img=new Image();img.src=`assets/moles/${type}_${f}.png`;ART.moles[type].push(img)}
 }
 
-// V3.6: Keep the original three-frame images as safety fallbacks.
+// V3.7: Keep the original three-frame images as safety fallbacks.
 // Each special mole has 12 transparent 256x256 frames in its own directory.
 ART.specialFrames={};
 for(const type of ['fast','gold','heart','bomb','boss']){
@@ -152,7 +152,7 @@ if(m.stage==='hit'){line(-31,-23,-14,-11,'#54352d',5);line(-31,-11,-14,-23,'#543
 ellipse(0,-11,11,8,'#ee9c94');ellipse(0,4,21,14,'#6f3c32');ellipse(0,7,13,7,'#e98d8b');rounded(-9,-1,8,12,3,'#fff6e4');rounded(1,-1,8,12,3,'#fff6e4');
 if(type==='fast'){rounded(-63,-79,126,16,4,'#e84d4c');rounded(33,-84,35,13,5,'#f0be55')}if(type==='heart'){star(45,-90,15,'#f9b6ca');ellipse(38,-100,18,16,'#ec78a4');ellipse(53,-101,18,16,'#f699bd');star(-54,-90,9,'#ffe3ea')}if(type==='gold'||type==='boss'){ctx.fillStyle='#ffc637';ctx.beginPath();ctx.moveTo(-39,-98);ctx.lineTo(-43,-128);ctx.lineTo(-18,-112);ctx.lineTo(0,-136);ctx.lineTo(18,-112);ctx.lineTo(43,-128);ctx.lineTo(39,-98);ctx.closePath();ctx.fill();rounded(-42,-100,84,14,5,'#f3aa25','#fff0a4',3);star(0,-110,9,'#fff4c6')}if(type==='boss'){rounded(-79,-23,25,67,10,'#c64e5a');rounded(55,-23,25,67,10,'#c64e5a')}if(type==='bomb'){ellipse(0,-112,6,17,'#8c604e');ellipse(2,-131,11,11,'#ff9d33');star(2,-136,12,'#fff2a1')}
 ctx.restore()}
-// V3.6: retain normal-mole alignment tuning, plus 12-frame animations for all five special types.
+// V3.7: retain normal-mole alignment tuning, plus 12-frame animations for all five special types.
 // Tuning these values does not require re-uploading any PNG files.
 const NORMAL_TUNE={
   offsetX:6,          // visual horizontal center relative to the fixed hole
@@ -169,26 +169,21 @@ const NORMAL_BOUNDS=[
  [42,42,227,222],[43,68,217,222],[35,94,216,224],[41,113,215,224],
  [47,119,213,219],[50,135,207,217],[46,153,211,213],null
 ];
-// Determine the actual alpha bounds once per loaded sprite. Some source frames
-// have large transparent margins and wildly different character sizes.
-const spriteBoundsCache=new WeakMap();
-function visibleBounds(img){
- if(!usable(img))return null;
- if(spriteBoundsCache.has(img))return spriteBoundsCache.get(img);
- try{
-  const cv=document.createElement('canvas');cv.width=img.naturalWidth;cv.height=img.naturalHeight;
-  const c=cv.getContext('2d',{willReadFrequently:true});c.drawImage(img,0,0);
-  const pixels=c.getImageData(0,0,cv.width,cv.height).data;
-  let left=cv.width,right=0,top=cv.height,bottom=0;
-  for(let y=0;y<cv.height;y++)for(let x=0;x<cv.width;x++){
-   if(pixels[(y*cv.width+x)*4+3]>75){left=Math.min(left,x);right=Math.max(right,x+1);top=Math.min(top,y);bottom=Math.max(bottom,y+1)}
-  }
-  const result=right>left&&bottom>top?{left,right,top,bottom}:null;
-  spriteBoundsCache.set(img,result);return result;
- }catch(e){return {left:0,right:img.naturalWidth,top:0,bottom:img.naturalHeight}}
-}
+// V3.7 — Only the rendered character coordinates change. All PNG files, frame
+// sequences, image scaling, gameplay holes and hit detection remain untouched.
+// The nine entries run left-to-right, top-to-bottom. x positive=right; y positive=down.
+const MOLE_POSITION={
+  normal:[{x:12,y:6},{x:8,y:6},{x:8,y:6},
+          {x:-4,y:4},{x:5,y:4},{x:8,y:4},
+          {x:-22,y:0},{x:0,y:0},{x:22,y:0}],
+  special:[{x:12,y:12},{x:8,y:12},{x:8,y:12},
+           {x:-4,y:9},{x:5,y:9},{x:8,y:9},
+           {x:-22,y:6},{x:0,y:6},{x:22,y:6}]
+};
 function mole(m){
- const p=holes[m.i],out=m.out;
+ const origin=holes[m.i];
+ const correction=(m.type==='normal'?MOLE_POSITION.normal:MOLE_POSITION.special)[m.i];
+ const p={...origin,x:origin.x+correction.x,y:origin.y+correction.y},out=m.out;
  if(out<=0)return;
  const smooth=out*out*(3-2*out);
  if(m.type==='normal' && ART.normalFrames.some(usable)){
@@ -207,8 +202,7 @@ function mole(m){
   const scale=NORMAL_TUNE.widthScale;
   // Only bottom-left and bottom-right normal moles need horizontal calibration.
   // Hole indices: bottom-left=6, bottom-right=8. Keep all other holes unchanged.
-  const bottomShift=m.i===6?-22:m.i===8?22:0;
-  const cx=p.x+NORMAL_TUNE.offsetX+bottomShift;
+  const cx=p.x+NORMAL_TUNE.offsetX;
   const imageBottom=p.y+NORMAL_TUNE.bottomOffset+(1-smooth)*NORMAL_TUNE.riseDistance;
   // We anchor each frame by its *visible* bottom edge, not its canvas border.
   // Keep the background's original painted hole exactly where it is.
@@ -216,7 +210,7 @@ function mole(m){
   const imageY=imageBottom-b[3]*scale;
   ctx.save();
   ctx.beginPath();
-  ctx.rect(p.x+bottomShift-NORMAL_TUNE.clipHalfWidth,p.y-215,
+  ctx.rect(p.x-NORMAL_TUNE.clipHalfWidth,p.y-215,
     NORMAL_TUNE.clipHalfWidth*2,225+NORMAL_TUNE.clipBottomOffset);
   ctx.clip();
   ctx.drawImage(img,imageX,imageY,256*scale,256*scale);
@@ -224,36 +218,30 @@ function mole(m){
   if(m.stage==='hit')drawV3Effect('hit',p,m.age,.45);
   return;
  }
-  // V3.6: align each special sprite by its actual visible pixels, not its 256px canvas.
-  // The 12-frame sheets contain partial-rise poses; moving those frames again
-  // creates a double-rise effect. Use full-body poses and animate the reveal with clipping.
+  // V3.7: play 12-frame special mole animation, retaining legacy art as fallback.
   const frames=ART.specialFrames&&ART.specialFrames[m.type];
   if(frames&&frames.some(usable)){
-    let index=m.stage==='hit'?6:4+(Math.floor(elapsed*3+m.seed)%4);
+    // Sprite sequence: 01-04 rise, 05-09 active, 10-12 retract.
+    let index;
+    if(m.stage==='appear') index=Math.min(4,Math.floor(m.age/.23*5));
+    else if(m.stage==='hide') index=8+Math.min(3,Math.floor(m.age/.24*4));
+    else if(m.stage==='hit') index=6;
+    else index=4+(Math.floor(elapsed*5+m.seed)%5);
     let img=frames[index];
     if(!usable(img))img=frames.find(usable);
     if(usable(img)){
-      const b=visibleBounds(img);
-      if(b){
-        const bottomShift=m.i===6?-22:m.i===8?22:0;
-        const centerX=p.x+bottomShift;
-        // Each species is normalized to a consistent visible body width.
-        const targetWidth=m.type==='boss'?162:151;
-        const scale=targetWidth/Math.max(1,b.right-b.left);
-        const visibleCenter=(b.left+b.right)/2;
-        const visibleBottom=b.bottom;
-        const kick=m.stage==='hit'?Math.sin(Math.min(1,m.age/.32)*Math.PI)*8:0;
-        const imageBottom=p.y+15+(1-smooth)*135+kick;
-        ctx.save();
-        ctx.beginPath();
-        ctx.rect(p.x+bottomShift-99,p.y-220,198,232);
-        ctx.clip();
-        ctx.drawImage(img,centerX-visibleCenter*scale,
-          imageBottom-visibleBottom*scale,img.naturalWidth*scale,img.naturalHeight*scale);
-        ctx.restore();
-        if(m.stage==='hit')drawV3Effect('hit',p,m.age,.45);
-        return;
-      }
+      // All 12 sprites are 256px square with the mole centered and feet near y=235.
+      // Fix the feet at the painted hole and clip the lower part inside the hole.
+      const scale=m.type==='boss'?.80:.76;
+      const bottom=p.y+16;
+      const cx=p.x;
+      const kick=m.stage==='hit'?Math.sin(Math.min(1,m.age/.32)*Math.PI)*7:0;
+      ctx.save();
+      ctx.beginPath();ctx.rect(p.x-95,p.y-203,190,215);ctx.clip();
+      ctx.drawImage(img,cx-128*scale,bottom-235*scale+kick,256*scale,256*scale);
+      ctx.restore();
+      if(m.stage==='hit')drawV3Effect('hit',p,m.age,.45);
+      return;
     }
   }
   // Missing sprite files: gracefully fall back to the original 3-frame assets.
