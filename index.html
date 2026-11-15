@@ -2,28 +2,48 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f7bc74"><meta name="game-build" content="V4.1-assets-refresh-20261115"><title>鼠除大作戰 V4.1｜新圖片載入版</title>
+<meta name="theme-color" content="#f7bc74"><meta name="game-build" content="V4.2-hammer-shop-20261115"><title>鼠除大作戰 V4.2｜魔法槌商店版</title>
 <style>
 :root{font-family:'Trebuchet MS','Noto Sans TC','Microsoft JhengHei',sans-serif;color:#56321f;background:#fce5c6}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 20% 10%,#fff7d1,#f5c5a0 65%,#ddaa82);display:flex;justify-content:center;align-items:center;padding:12px}button{font:inherit;cursor:pointer;border:0;touch-action:manipulation}button:focus-visible{outline:3px solid white;outline-offset:3px}.shell{position:relative;width:min(100%,1000px);aspect-ratio:960/660;min-height:400px;max-height:calc(100dvh - 24px);overflow:hidden;border-radius:25px;border:6px solid #fff4cc;box-shadow:0 20px 65px #84512b66, inset 0 0 0 3px #c9804b;background:#83ce96;isolation:isolate}canvas{display:block;width:100%;height:100%;touch-action:none}.hud{position:absolute;top:13px;left:16px;right:16px;display:none;align-items:center;justify-content:space-between;gap:7px;pointer-events:none}.hud.show{display:flex}.pill{background:linear-gradient(#85502d,#58351f);border:3px solid #ffc96c;box-shadow:0 4px 0 #543216,0 6px 11px #4327125e;border-radius:16px;color:#fff5ce;padding:5px 13px;text-align:center;font-size:clamp(11px,1.65vw,17px);font-weight:900;white-space:nowrap;text-shadow:1px 2px 1px #362011}.pill strong{font-size:1.24em;color:#ffe561}.hud button{pointer-events:auto;min-width:49px}.overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:17px;background:linear-gradient(#fff0cf44,#4c2c3366);overflow-y:auto}.overlay.show{display:flex}.panel{width:min(670px,98%);max-height:100%;overflow-y:auto;text-align:center;background:linear-gradient(150deg,#fff9df,#ffe1ad);border:5px solid #fff9d5;border-radius:28px;box-shadow:0 12px 0 #b57347,0 19px 36px #502d2380;padding:clamp(13px,2.5vw,25px)}h1{margin:0;font-size:clamp(30px,6vw,58px);color:#ef703e;-webkit-text-stroke:1.5px #923f2b;text-shadow:2px 4px #ffe87d,4px 6px #b35032;line-height:1.2}h2{font-size:clamp(22px,3.6vw,35px);margin:0 0 8px;color:#984c2e}p{margin:8px 0 15px;line-height:1.5}.sub{font-weight:800;color:#a66d46}.buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:11px;margin:15px 0}.btn{color:white;font-weight:900;font-size:clamp(15px,2vw,20px);padding:12px 21px;border-radius:17px;background:linear-gradient(#ffb23f,#f07631);border:3px solid #fff2c2;box-shadow:0 5px 0 #b85e34,0 7px 9px #6b422b55;text-shadow:1px 2px #a04f2c}.btn.secondary{background:linear-gradient(#94d5ec,#358bbf);box-shadow:0 5px 0 #33728c}.btn.green{background:linear-gradient(#b1d875,#55a95d);box-shadow:0 5px 0 #467e43}.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #b85e34}.btn[disabled]{opacity:.5;filter:grayscale(.7);cursor:not-allowed}.difficulty{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}.difficulty button{background:#fff6de;border:2px solid #dab079;padding:9px 16px;border-radius:12px;color:#8c603d;font-weight:900}.difficulty button.selected{background:#f9a848;border-color:#ae5836;color:white}.map{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:520px;margin:12px auto}.map button{border:2px solid #f0c182;background:#fff8d8;border-radius:14px;padding:8px 2px;min-height:52px;font-weight:900;color:#93522d}.map button.current{background:#ffe18c;box-shadow:inset 0 0 0 2px #e69e3a}.map button.locked{filter:grayscale(.8);opacity:.45}.map small{display:block;font-size:10px}.note{font-size:13px;color:#9b714e}.statline{font-size:19px;font-weight:900;color:#8e502e;margin:12px 0}.stars{font-size:45px;color:#e7a82a;text-shadow:0 2px #ad6228}.toast{position:absolute;top:83px;left:50%;transform:translateX(-50%);background:#fff7dbee;border:3px solid #e9aa63;border-radius:14px;padding:7px 14px;color:#87472a;font-weight:900;text-align:center;display:none;pointer-events:none;z-index:3}.toast.show{display:block}.footer{position:fixed;bottom:0;color:#805537;font-size:11px;opacity:.75;pointer-events:none}@media(max-width:680px){body{padding:0;background:#eec49f}.shell{width:100vw;height:100dvh;max-height:none;min-height:0;border-width:0;border-radius:0;aspect-ratio:auto}.hud{left:5px;right:5px;top:7px;gap:3px}.pill{font-size:11px;padding:6px 5px;border-width:2px;border-radius:11px}.hud button{min-width:37px}.overlay{padding:7px}.panel{padding:14px 8px;border-radius:20px}.map{gap:4px}.map button{min-height:42px}.footer{display:none}}
 
 /* V3 普通地鼠逐格動畫與特效整合 */
 .shell{background:#d4eba4}.panel{background:linear-gradient(148deg,#fff9e5f4,#ffdfb4f0);backdrop-filter:blur(8px)}
 .pill{background:linear-gradient(#7b482ddd,#4c2b20ee)}.buffs{position:absolute;top:66px;right:16px;background:#fff9e0d9;color:#714024;font-size:14px;font-weight:900;border-radius:12px;padding:3px 9px;display:none;pointer-events:none;z-index:4}.buffs.show{display:block}@media(max-width:680px){.buffs{top:53px;right:5px;font-size:11px}.hud{gap:2px}.pill{padding-left:4px;padding-right:4px}}
+
+/* V4.2: responsive collectible hammer store */
+.home-hero{font-size:54px;filter:drop-shadow(0 4px 3px #7c4a3050);margin-bottom:3px}
+.home-wallet{font-weight:900;background:#fff0b9;border:2px solid #e8ba6d;border-radius:14px;padding:8px 10px;display:inline-block;margin:5px 0;color:#815326}
+.home-shop-btn{background:linear-gradient(150deg,#fc92c8,#d85b9b)!important;box-shadow:0 5px 0 #a3467a!important}
+.shop-panel{width:min(780px,99%);max-height:100%;overflow:auto}
+.shop-lead{font-weight:900;color:#985a37;margin:7px 0 12px}
+.shop-wallet{font-size:20px;font-weight:900;color:#a46116;background:#fff3ca;border:2px solid #e4b668;border-radius:14px;padding:8px;margin-bottom:13px}
+.shop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;align-items:stretch}
+.shop-card{position:relative;background:linear-gradient(165deg,#fffdf2,#ffe5bc);border:3px solid #e8bb86;border-radius:18px;box-shadow:0 4px 0 #c89962;padding:9px 5px;display:flex;flex-direction:column;align-items:center;gap:4px;overflow:hidden}
+.shop-card.equipped{border-color:#63be93;box-shadow:0 4px 0 #379568;background:linear-gradient(165deg,#e9fff5,#fff4ca)}
+.shop-card img{width:min(100%,126px);height:110px;object-fit:contain;filter:drop-shadow(0 6px 4px #5a362a44)}
+.shop-card h3{font-size:16px;margin:3px 0;color:#8c4728}.shop-card small{font-size:11px;color:#98745a;min-height:32px;display:block}
+.shop-card .price{font-size:15px;font-weight:900;color:#c28120}
+.shop-action{font-weight:900;border-radius:11px;border:2px solid #ffeab1;background:linear-gradient(#ffbc63,#ed823c);color:#fff;box-shadow:0 3px 0 #b9662b;padding:7px 13px;min-width:95px;max-width:100%}
+.shop-action[disabled]{cursor:default;background:#bed9c6;color:#476955;box-shadow:none;border-color:#a8d2b4}
+.shop-fx{position:absolute;width:140px;height:140px;z-index:5;pointer-events:none;left:50%;top:43%;transform:translate(-50%,-50%);display:none;image-rendering:auto}
+.shop-card .ribbon{position:absolute;top:5px;right:-25px;transform:rotate(40deg);background:#70c89b;color:#fff;padding:3px 26px;font-size:11px;font-weight:900}
+@media(max-width:650px){.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.shop-card img{height:90px}.shop-card h3{font-size:14px}.shop-card small{min-height:30px;font-size:10px}.shop-panel{padding:13px 7px}.home-hero{font-size:40px}}
 </style>
 </head>
 <body>
 <main class="shell" id="shell" aria-label="鼠除大作戰遊戲"><canvas id="game" width="960" height="660" aria-label="打地鼠遊戲畫面"></canvas>
 <div class="hud" id="hud"><div class="pill">⭐ <span id="score">0</span></div><div class="pill">🪙 <span id="coins">0</span></div><div class="pill">⏰ <span id="timer">60</span>s</div><div class="pill">🔥 <span id="combo">0</span> Combo</div><div class="pill">🎯 <span id="objective">0/0</span></div><button class="pill" id="pause" aria-label="暫停">Ⅱ</button></div>
 <div class="toast" id="toast"></div><div class="buffs" id="buffs" aria-live="polite"></div>
-<section class="overlay show" id="home"><div class="panel"><div style="font-size:48px">🌟🐹✨</div><h1>鼠除大作戰</h1><p class="sub">魔法星星槌 · 六大世界 · 30個關卡 · 神祕寶箱</p><p class="note" style="margin:2px 0 5px;font-weight:900;color:#a04d2e">目前版本：V4.1｜地鼠新圖片快取修正版（2026-11-15）</p><p>敲地鼠拿分數！黃金地鼠 <b>+5</b>、炸彈地鼠 <b>-3</b>、愛心地鼠 <b>+3秒</b><br>連續敲中可獲得 Combo 加成，20 連擊進入 FEVER！<br>🎁 寶箱有隨機獎勵｜🌈 彩虹地鼠很稀有｜💣 爆炸只扣 3 分</p><div class="buttons"><button class="btn" id="chooseLevel">🗺️ 選擇關卡</button><button class="btn secondary" id="endless">♾️ 無盡模式</button></div><p class="note">手機觸控與滑鼠都可以遊玩 · 敲擊有音效 · 支援裝置才會震動</p><p id="homeWallet" class="note">🪙 0 金幣　🎀 0 收藏禮物</p><div class="buttons"><button class="btn green" id="audioBtn">🔊 音效開啟</button></div></div></section>
+<section class="overlay show" id="home"><div class="panel"><div class="home-hero">🌟🐹✨</div><h1>鼠除大作戰</h1><p class="sub">魔法星星槌 · 六大世界 · 30個關卡 · 神祕寶箱</p><p class="note" style="margin:2px 0 5px;font-weight:900;color:#a04d2e">目前版本：V4.2｜魔法槌商店與收藏主畫面（2026-11-15）</p><p>敲地鼠拿分數！黃金地鼠 <b>+5</b>、炸彈地鼠 <b>-3</b>、愛心地鼠 <b>+3秒</b><br>連續敲中可獲得 Combo 加成，20 連擊進入 FEVER！<br>🎁 寶箱有隨機獎勵｜🌈 彩虹地鼠很稀有｜💣 爆炸只扣 3 分</p><div class="buttons"><button class="btn" id="chooseLevel">🗺️ 選擇關卡</button><button class="btn secondary" id="endless">♾️ 無盡模式</button><button class="btn home-shop-btn" id="openShop">🛍️ 魔法槌商店</button></div><p class="note">手機觸控與滑鼠都可以遊玩 · 敲擊有音效 · 支援裝置才會震動</p><p id="homeWallet" class="home-wallet">🪙 0 金幣　🎀 0 收藏禮物</p><div class="buttons"><button class="btn green" id="audioBtn">🔊 音效開啟</button></div></div></section>
+<section class="overlay" id="shop"><div class="panel shop-panel"><h2>🛍️ 魔法槌商店</h2><p class="shop-lead">收集可愛槌子，購買後永久解鎖！全是外觀造型，不影響分數。</p><div class="shop-wallet" id="shopWallet">🪙 0 金幣</div><div class="shop-grid" id="shopGrid"></div><p class="note">購買及裝備紀錄會儲存在目前瀏覽器；清除網站資料可能使紀錄消失。</p><div class="buttons"><button class="btn secondary" id="shopBack">🏠 返回首頁</button></div></div></section>
 <section class="overlay" id="levels"><div class="panel"><h2>🗺️ 關卡選擇</h2><p class="sub" id="worldLabel">每5關進入新的世界！</p><div class="difficulty" id="diffBtns"><button data-diff="easy" class="selected">🌼 簡單</button><button data-diff="normal">⚡ 普通</button><button data-diff="hard">🔥 困難</button></div><div class="map" id="levelMap"></div><p class="note">完成關卡可解鎖下一關。進度保存在此瀏覽器。</p><div class="buttons"><button class="btn secondary" data-back>↩ 回首頁</button></div></div></section>
 <section class="overlay" id="result"><div class="panel"><h2 id="resultTitle">挑戰結果</h2><div class="stars" id="resultStars">⭐⭐⭐</div><p class="statline" id="resultStats"></p><p id="resultDetail"></p><div class="buttons"><button class="btn green" id="nextLevel">下一關 ➜</button><button class="btn" id="retry">🔄 再玩一次</button><button class="btn secondary" id="resultLevels">🗺️ 關卡選擇</button></div></div></section>
 <section class="overlay" id="paused"><div class="panel"><h2>⏸ 遊戲暫停</h2><p>魔法星星槌準備好了嗎？</p><div class="buttons"><button class="btn green" id="resume">▶ 繼續遊戲</button><button class="btn secondary" id="quit">🏠 返回首頁</button></div></div></section>
-</main><div class="footer">鼠除大作戰 · V4.1 新圖片載入版 · 八種地鼠・30關 · GitHub Pages</div>
+</main><div class="footer">鼠除大作戰 · V4.2 槌子商店版 · 八種地鼠・30關 · GitHub Pages</div>
 <script>
 'use strict';
 const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
-const ART={bg:{},moles:{},normalFrames:[],effects:{hit:[],appear:[],disappear:[]}};
+const ART={bg:{},moles:{},normalFrames:[],effects:{hit:[],appear:[],disappear:[]},hammers:{}};
 const BACKGROUND_NAMES=['fairytale','comic','fantasy','candy','starlight','castle'];
 for(const name of BACKGROUND_NAMES){const img=new Image();img.src='assets/backgrounds/'+name+'.jpg';ART.bg[name]=img}
 for(const type of ['normal','fast','gold','heart','bomb','boss']){
@@ -59,6 +79,19 @@ for(const [kind,folder,count] of [['chest','moles',12],['rainbow','moles',12],['
    ART.v4[kind].push(img);
  }
 }
+
+const HAMMER_CATALOG=[
+ {id:'star',name:'星星魔法槌',cost:0,desc:'初始裝備｜星光閃耀'},
+ {id:'candy',name:'草莓糖果槌',cost:60,desc:'甜甜的草莓旋轉糖'},
+ {id:'ice',name:'冰晶魔法槌',cost:120,desc:'透亮冰晶與雪花'},
+ {id:'rainbow',name:'彩虹幸運槌',cost:200,desc:'彩虹星星和小翅膀'},
+ {id:'lightning',name:'閃電勇者槌',cost:280,desc:'藍金電光閃耀'},
+ {id:'royal',name:'王者寶石槌',cost:420,desc:'皇冠、金飾與紅寶石'}
+];
+for(const h of HAMMER_CATALOG){ART.hammers[h.id]=[];for(let i=1;i<=4;i++){
+ const im=new Image();im.src=`assets/hammers/${h.id}/${h.id}_${String(i).padStart(2,'0')}.png?set=42`;
+ ART.hammers[h.id].push(im);
+}}
 function usable(img){return !!(img&&img.complete&&img.naturalWidth>0)}
 function drawV3Frame(img,x,baseY,scale=1){
  if(!usable(img))return false;
@@ -92,6 +125,47 @@ function save(){try{localStorage.setItem('mole_progress',JSON.stringify(progress
 function saveWallet(){try{localStorage.setItem('mole_v4_wallet',JSON.stringify(wallet))}catch{}}
 function addCoins(amount){wallet.coins=(wallet.coins||0)+amount;saveWallet();updateHUD()}
 function updateHomeWallet(){const el=$('homeWallet');if(el)el.textContent=`🪙 ${wallet.coins||0} 金幣　🎀 ${wallet.gifts||0} 收藏禮物　🎁 已開 ${wallet.opened||0} 箱`}
+
+// V4.2 persistent hammer purchases piggyback on the existing wallet.
+function hammerOwnership(){
+ if(!Array.isArray(wallet.hammers))wallet.hammers=['star'];
+ if(!wallet.hammers.includes('star'))wallet.hammers.unshift('star');
+ if(!HAMMER_CATALOG.some(h=>h.id===wallet.equippedHammer))wallet.equippedHammer='star';
+}
+function shopBalance(){const el=$('shopWallet');if(el)el.textContent=`🪙 持有 ${wallet.coins||0} 金幣　｜　目前裝備：${HAMMER_CATALOG.find(h=>h.id===wallet.equippedHammer)?.name||'星星魔法槌'}`;}
+function shopEffect(card,kind){
+ const fx=document.createElement('img');fx.className='shop-fx';fx.alt='';card.append(fx);
+ let i=1;fx.style.display='block';
+ const update=()=>{if(i>8){fx.remove();return}fx.src=`assets/effects/${kind}/${kind}_${String(i++).padStart(2,'0')}.png?set=42`};
+ update();const timer=setInterval(()=>{if(!fx.isConnected){clearInterval(timer);return}if(i>8){clearInterval(timer);fx.remove();return}update()},65);
+}
+function renderShop(){hammerOwnership();shopBalance();const grid=$('shopGrid');grid.replaceChildren();
+ HAMMER_CATALOG.forEach(h=>{
+  const owned=wallet.hammers.includes(h.id),equipped=wallet.equippedHammer===h.id;
+  const card=document.createElement('div');card.className='shop-card'+(equipped?' equipped':'');
+  const img=document.createElement('img');img.src=`assets/hammers/${h.id}/${h.id}_01.png?set=42`;img.alt=h.name;
+  const title=document.createElement('h3');title.textContent=h.name;
+  const info=document.createElement('small');info.textContent=h.desc;
+  const cost=document.createElement('div');cost.className='price';cost.textContent=owned?'✅ 已解鎖':`🪙 ${h.cost} 金幣`;
+  const btn=document.createElement('button');btn.className='shop-action';btn.textContent=equipped?'已裝備':owned?'裝備':'購買';btn.disabled=equipped;
+  btn.addEventListener('click',()=>{
+   if(!wallet.hammers.includes(h.id)){
+     if((wallet.coins||0)<h.cost){shopEffect(card,'shop_click');showToast(`金幣不足！還需要 ${h.cost-(wallet.coins||0)} 枚`);return}
+     wallet.coins-=h.cost;wallet.hammers.push(h.id);wallet.equippedHammer=h.id;
+     saveWallet();shopEffect(card,'shop_buy');showToast(`🎉 解鎖「${h.name}」！`);
+   }else{
+     wallet.equippedHammer=h.id;saveWallet();shopEffect(card,'shop_equip');showToast(`✅ 已裝備 ${h.name}`);
+   }
+   // Delay refresh so the animated effect remains visible on the clicked card.
+   shopBalance();updateHomeWallet();updateHUD();
+   setTimeout(()=>{if(phase==='shop')renderShop()},550);
+  });
+  card.append(img,title,info,cost,btn);if(equipped){const ribbon=document.createElement('div');ribbon.className='ribbon';ribbon.textContent='裝備中';card.append(ribbon)}grid.append(card);
+ });
+}
+function openShop(){renderShop();setScreen('shop')}
+hammerOwnership();
+
 function rewardChest(p){
  wallet.opened=(wallet.opened||0)+1;
  const v=Math.random();let note='';
@@ -113,7 +187,7 @@ function ellipse(x,y,rx,ry,color){ctx.beginPath();ctx.ellipse(x,y,Math.max(.1,rx
 function star(x,y,r,color,angle=0){ctx.beginPath();for(let i=0;i<10;i++){let a=angle-Math.PI/2+i*Math.PI/5,rr=i%2?r*.48:r;let xx=x+rr*Math.cos(a),yy=y+rr*Math.sin(a);if(!i)ctx.moveTo(xx,yy);else ctx.lineTo(xx,yy)}ctx.closePath();ctx.fillStyle=color;ctx.fill()}
 function line(x1,y1,x2,y2,color,w){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=color;ctx.lineWidth=w;ctx.lineCap='round';ctx.stroke()}
 function label(s,x,y,size=24,color='white',outline='#86512b'){ctx.font=`1000 ${size}px 'Trebuchet MS','Microsoft JhengHei',sans-serif`;ctx.textAlign='center';ctx.lineJoin='round';ctx.lineWidth=Math.max(3,size/5);ctx.strokeStyle=outline;ctx.strokeText(s,x,y);ctx.fillStyle=color;ctx.fillText(s,x,y)}
-function setScreen(id){['home','levels','result','paused'].forEach(v=>$(v).classList.toggle('show',v===id));$('hud').classList.toggle('show',!id||id==='paused');phase=id||'playing'}
+function setScreen(id){['home','levels','result','paused','shop'].forEach(v=>$(v).classList.toggle('show',v===id));$('hud').classList.toggle('show',!id||id==='paused');phase=id||'playing'}
 function showToast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(showToast.t);showToast.t=setTimeout(()=>$('toast').classList.remove('show'),1450)}
 function setupMap(){const map=$('levelMap');map.innerHTML='';for(let i=1;i<=30;i++){let b=document.createElement('button'),locked=i>progress.unlocked,best=progress.stars[i]||0;b.innerHTML=(locked?'🔒':i)+`<small>${locked?'未解鎖':'★'.repeat(best)+'☆'.repeat(3-best)}</small>`;b.className=(locked?'locked ':'')+(i===progress.unlocked?'current':'');b.disabled=locked;b.onclick=()=>start(i,'level');map.append(b)}$('worldLabel').textContent=`目前解鎖第 ${progress.unlocked} 關｜每5關更換背景`}
 function openLevels(){setupMap();setScreen('levels')}
@@ -426,11 +500,23 @@ function drawV4Overlays(){
    ctx.restore();
  }
 }
-function hammerDraw(){if(!hammer)return;let t=hammer.t,a=t<.12?-1.05+1.1*t/.12:.05-(t-.12)*3.2;ctx.save();ctx.translate(hammer.x+77,hammer.y-105);ctx.rotate(a);line(0,22,60,102,'#d78b6a',22);line(0,22,60,102,'#ffcf9b',11);rounded(-47,-45,92,66,21,'#f2a5bb','#ffdc6c',8);rounded(-43,-40,84,59,18,'#f7a6bc');star(0,-12,26,'#ffe66a');ellipse(-25,-31,9,6,'#fff9f0a1');star(52,84,13,'#ffc2da');ctx.restore()}
+function hammerDrawLegacy(){if(!hammer)return;let t=hammer.t,a=t<.12?-1.05+1.1*t/.12:.05-(t-.12)*3.2;ctx.save();ctx.translate(hammer.x+77,hammer.y-105);ctx.rotate(a);line(0,22,60,102,'#d78b6a',22);line(0,22,60,102,'#ffcf9b',11);rounded(-47,-45,92,66,21,'#f2a5bb','#ffdc6c',8);rounded(-43,-40,84,59,18,'#f7a6bc');star(0,-12,26,'#ffe66a');ellipse(-25,-31,9,6,'#fff9f0a1');star(52,84,13,'#ffc2da');ctx.restore()}
+function hammerDraw(){
+ if(!hammer)return;
+ const id=wallet.equippedHammer||'star',seq=ART.hammers[id]||ART.hammers.star;
+ const idx=hammer.t<.055?0:hammer.t<.11?1:hammer.t<.18?2:3;
+ const img=seq&&seq[idx];
+ if(!usable(img)){hammerDrawLegacy();return}
+ ctx.save();ctx.translate(hammer.x+76,hammer.y-100);
+ const t=hammer.t,angle=t<.11?-.48+(.88*t/.11):.40-(t-.11)*1.75;
+ ctx.rotate(angle);
+ ctx.drawImage(img,-109,-106,218,218);
+ ctx.restore();
+}
 function render(){ctx.save();if(shake>0)ctx.translate(rnd(-shake,shake),rnd(-shake,shake));bg();for(let i=0;i<holes.length;i++){drawHole(holes[i]);let m=active.find(m=>m.i===i);if(m)mole(m);frontHole(holes[i])}drawV4Overlays();for(let p of particles){ctx.globalAlpha=clamp(p.life/.5,0,1);if(p.shape==='star')star(p.x,p.y,p.size,p.color,elapsed*4);else ellipse(p.x,p.y,p.size*.58,p.size*.58,p.color)}ctx.globalAlpha=1;for(let t of texts){ctx.globalAlpha=clamp(t.life,0,1);label(t.s,t.x,t.y,t.size*t.life**.12,t.color)}ctx.globalAlpha=1;hammerDraw();ctx.restore();if(phase==='home'){label('✦ 魔法森林探險 ✦',480,190,32,'#fff1b2','#925e3c')}}
 function frame(ts){if(!last)last=ts;let dt=Math.min(.05,(ts-last)/1000);last=ts;update(dt);render();requestAnimationFrame(frame)}
 canvas.addEventListener('pointerdown',e=>{e.preventDefault();let rect=canvas.getBoundingClientRect(),x=(e.clientX-rect.left)*W/rect.width,y=(e.clientY-rect.top)*H/rect.height;hitAt(x,y)});canvas.addEventListener('contextmenu',e=>e.preventDefault());
-updateHomeWallet();$('chooseLevel').onclick=openLevels;$('resultLevels').onclick=openLevels;$('endless').onclick=()=>start(1,'endless');$('retry').onclick=()=>start(level,mode);$('nextLevel').onclick=()=>start(Math.min(30,level+1),'level');$('pause').onclick=()=>setScreen('paused');$('resume').onclick=()=>setScreen(null);$('quit').onclick=()=>setScreen('home');document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>setScreen('home'));$('audioBtn').onclick=()=>{soundOn=!soundOn;$('audioBtn').textContent=soundOn?'🔊 音效開啟':'🔇 音效關閉'};document.querySelectorAll('[data-diff]').forEach(b=>b.onclick=()=>{difficulty=b.dataset.diff;document.querySelectorAll('[data-diff]').forEach(q=>q.classList.toggle('selected',q===b))});document.addEventListener('visibilitychange',()=>{if(document.hidden&&phase==='playing')setScreen('paused')});
+updateHomeWallet();$('openShop').onclick=openShop;$('shopBack').onclick=()=>setScreen('home');$('chooseLevel').onclick=openLevels;$('resultLevels').onclick=openLevels;$('endless').onclick=()=>start(1,'endless');$('retry').onclick=()=>start(level,mode);$('nextLevel').onclick=()=>start(Math.min(30,level+1),'level');$('pause').onclick=()=>setScreen('paused');$('resume').onclick=()=>setScreen(null);$('quit').onclick=()=>setScreen('home');document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>setScreen('home'));$('audioBtn').onclick=()=>{soundOn=!soundOn;$('audioBtn').textContent=soundOn?'🔊 音效開啟':'🔇 音效關閉'};document.querySelectorAll('[data-diff]').forEach(b=>b.onclick=()=>{difficulty=b.dataset.diff;document.querySelectorAll('[data-diff]').forEach(q=>q.classList.toggle('selected',q===b))});document.addEventListener('visibilitychange',()=>{if(document.hidden&&phase==='playing')setScreen('paused')});
 requestAnimationFrame(frame);
 </script>
 </body>
